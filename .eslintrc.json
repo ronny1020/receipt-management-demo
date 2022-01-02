@@ -23,6 +23,12 @@
   },
   "plugins": ["vue", "@typescript-eslint"],
   "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["vite.config.ts"]
+      }
+    ],
     "vue/block-lang": [
       "error",
       {
@@ -71,6 +77,7 @@
     "vue/no-unused-refs": "error",
     "vue/no-useless-v-bind": "error",
     "vue/padding-line-between-blocks": "error",
+    "vue/script-setup-uses-vars": "error",
     "vue/v-for-delimiter-style": ["error", "of"],
     "vue/v-on-function-call": [
       "error",
@@ -78,8 +85,7 @@
       {
         "ignoreIncludesComment": false
       }
-    ],
-    "vue/script-setup-uses-vars": "error"
+    ]
   },
   "overrides": [
     {
@@ -96,5 +102,5 @@
       "processor": "vue/.vue"
     }
   ],
-  "ignorePatterns": ["index.html"]
+  "ignorePatterns": ["index.html", "**/*.png"]
 }
