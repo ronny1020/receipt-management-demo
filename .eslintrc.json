@@ -102,5 +102,5 @@
       "processor": "vue/.vue"
     }
   ],
-  "ignorePatterns": ["index.html", "**/*.png"]
+  "ignorePatterns": ["index.html", "**/*.png", "**/*.scss"]
 }
