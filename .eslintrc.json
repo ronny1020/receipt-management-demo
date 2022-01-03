@@ -29,6 +29,13 @@
         "devDependencies": ["vite.config.ts"]
       }
     ],
+    "import/prefer-default-export": "off",
+    "no-void": [
+      "error",
+      {
+        "allowAsStatement": true
+      }
+    ],
     "vue/block-lang": [
       "error",
       {

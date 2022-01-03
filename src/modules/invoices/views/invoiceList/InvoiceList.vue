@@ -11,8 +11,14 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import IconBase from '@/shared/components/icons/IconBase.vue'
 import MainLogo from '@/shared/components/icons/MainLogo.vue'
+import { initInvoices } from '../../application/initInvoices'
+
+onMounted(() => {
+  void initInvoices()
+})
 </script>
 
 <style lang="scss" scoped>
