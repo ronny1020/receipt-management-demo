@@ -11,6 +11,7 @@ specifiers:
   eslint-config-airbnb-base: ^15.0.0
   eslint-config-airbnb-typescript: ^16.1.0
   eslint-config-prettier: ^8.3.0
+  eslint-import-resolver-alias: ^1.1.2
   eslint-plugin-import: ^2.25.3
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-prettier-vue: ^3.1.0
@@ -54,6 +55,7 @@ devDependencies:
   eslint-config-airbnb-base: 15.0.0_b54597effeb7d09a84a334cc3c3dadae
   eslint-config-airbnb-typescript: 16.1.0_e19ca65bd6003a244b0428f0da484453
   eslint-config-prettier: 8.3.0_eslint@8.6.0
+  eslint-import-resolver-alias: 1.1.2_eslint-plugin-import@2.25.3
   eslint-plugin-import: 2.25.3_eslint@8.6.0
   eslint-plugin-prettier: 4.0.0_1c588f61426b1faf18812943f1678311
   eslint-plugin-prettier-vue: 3.1.0
@@ -1279,6 +1281,15 @@ packages:
       eslint: '>=7.0.0'
     dependencies:
       eslint: 8.6.0
+    dev: true
+
+  /eslint-import-resolver-alias/1.1.2_eslint-plugin-import@2.25.3:
+    resolution: {integrity: sha512-WdviM1Eu834zsfjHtcGHtGfcu+F30Od3V7I9Fi57uhBEwPkjDcii7/yW8jAT+gOhn4P/vOxxNAXbFAKsrrc15w==}
+    engines: {node: '>= 4'}
+    peerDependencies:
+      eslint-plugin-import: '>=1.4.0'
+    dependencies:
+      eslint-plugin-import: 2.25.3_eslint@8.6.0
     dev: true
 
   /eslint-import-resolver-node/0.3.6:

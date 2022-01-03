@@ -102,5 +102,17 @@
       "processor": "vue/.vue"
     }
   ],
-  "ignorePatterns": ["index.html", "**/*.png", "**/*.scss"]
+  "ignorePatterns": ["index.html", "**/*.png", "**/*.scss"],
+  "settings": {
+    "import/extensions": [".js", ".ts"],
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      },
+      "alias": {
+        "map": [["@", "./src"]],
+        "extensions": [".js", ".ts"]
+      }
+    }
+  }
 }
