@@ -4,10 +4,11 @@
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
     "dev": "vite",
+    "json-server": "json-server --watch db.json --port 3001",
     "lint": "eslint ./src/**/*.{ts,js,vue}",
     "lint:fix": "eslint ./src/**/*.{ts,js,vue} --fix",
-    "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "preview": "vite preview"
   },
   "dependencies": {
     "vue": "^3.2.26",
