@@ -9,7 +9,11 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "paths": {
+      "@/*": ["./src/*", "./dist/*"]
+    },
+    "types": ["node"]
   },
   "include": [
     "src/**/*.ts",
