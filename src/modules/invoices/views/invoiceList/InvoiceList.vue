@@ -13,7 +13,10 @@
 
     <div class="description">
       <span class="title">110年12月</span>
-      <span class="subtitle">共 0,000 張 , 總金額 000,000 元</span>
+      <span class="subtitle">
+        共 {{ invoiceNumber.toLocaleString() }} 張 , 總金額
+        {{ sumOfTotalPrice.toLocaleString() }} 元
+      </span>
     </div>
 
     <InvoiceListItem
@@ -25,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import InvoiceListItem from './InvoiceListItem.vue'
 import { initInvoices } from '../../application/initInvoices'
@@ -38,6 +41,15 @@ const { invoices } = storeToRefs(invoicesStore)
 onMounted(() => {
   void initInvoices()
 })
+
+const invoiceNumber = computed((): number => invoices.value.length)
+
+const sumOfTotalPrice = computed((): number =>
+  invoices.value.reduce(
+    (total, invoice) => total + (invoice.totalPrice || 0),
+    0
+  )
+)
 </script>
 
 <style lang="scss" scoped>
