@@ -20,16 +20,20 @@
     </div>
 
     <InvoiceListItem
-      v-for="invoice of invoices"
+      v-for="(invoice, index) of invoices"
       :key="invoice.id"
       :invoice="invoice"
+      @click="openInvoiceDetail(index)"
     />
   </div>
+
+  <InvoiceDetail />
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
+import InvoiceDetail from './InvoiceDetail.vue'
 import InvoiceListItem from './InvoiceListItem.vue'
 import { initInvoices } from '../../application/initInvoices'
 import useInvoicesStore from '../../store/invoiceStore'
@@ -50,6 +54,10 @@ const sumOfTotalPrice = computed((): number =>
     0
   )
 )
+
+function openInvoiceDetail(index: number): void {
+  invoicesStore.openInvoiceDetail(index)
+}
 </script>
 
 <style lang="scss" scoped>
