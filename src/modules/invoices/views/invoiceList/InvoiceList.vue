@@ -12,9 +12,9 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import { initInvoices } from '../../application/initInvoices'
 import IconBase from '@/shared/components/icons/IconBase.vue'
 import MainLogo from '@/shared/components/icons/MainLogo.vue'
-import { initInvoices } from '../../application/initInvoices'
 
 onMounted(() => {
   void initInvoices()

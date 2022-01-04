@@ -92,6 +92,34 @@
       {
         "ignoreIncludesComment": false
       }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "external",
+          "builtin",
+          "index",
+          "sibling",
+          "parent",
+          "internal",
+          "object",
+          "type"
+        ],
+        "newlines-between": "never",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "pathGroups": [
+          {
+            "pattern": "vue",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["vue"]
+      }
     ]
   },
   "overrides": [
