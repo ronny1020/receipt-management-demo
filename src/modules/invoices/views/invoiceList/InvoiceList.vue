@@ -49,10 +49,7 @@ onMounted(() => {
 const invoiceNumber = computed((): number => invoices.value.length)
 
 const sumOfTotalPrice = computed((): number =>
-  invoices.value.reduce(
-    (total, invoice) => total + (invoice.totalPrice || 0),
-    0
-  )
+  invoices.value.reduce((total, invoice) => total + (invoice.amount || 0), 0)
 )
 
 function openInvoiceDetail(index: number): void {

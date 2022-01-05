@@ -12,21 +12,9 @@ function getInvoiceLabel(invoice: InvoiceDto): InvoiceLabel {
   return '載具'
 }
 
-function getTotalPrice(invoice: InvoiceDto): number | null {
-  if (invoice.details) {
-    return invoice.details.reduce(
-      (acc, cur) => acc + cur.amount * cur.unitPrice,
-      0
-    )
-  }
-
-  return null
-}
-
 export default function getInvoiceFromDto(invoicesDto: InvoiceDto): Invoice {
   return {
     ...invoicesDto,
     label: getInvoiceLabel(invoicesDto),
-    totalPrice: getTotalPrice(invoicesDto),
   }
 }

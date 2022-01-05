@@ -17,9 +17,7 @@
     </div>
     <div class="invoice-total">
       {{
-        invoice.totalPrice === null
-          ? '--'
-          : invoice.totalPrice.toLocaleString()
+        invoice.amount === undefined ? '--' : invoice.amount.toLocaleString()
       }}元
     </div>
   </div>

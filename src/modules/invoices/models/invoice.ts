@@ -22,5 +22,4 @@ export type InvoiceLabel = '驗證中' | '電子' | '載具'
 
 export interface Invoice extends InvoiceDto {
   label: InvoiceLabel
-  totalPrice: number | null
 }
