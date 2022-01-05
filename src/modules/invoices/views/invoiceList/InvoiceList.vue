@@ -27,6 +27,11 @@
     />
   </div>
 
+  <div class="tap-bar">
+    <div>掃描輸入</div>
+    <div>手輸發票</div>
+  </div>
+
   <InvoiceDetail />
 </template>
 
@@ -93,6 +98,26 @@ header {
     color: #51519b;
     font-size: 14px;
     line-height: 21px;
+  }
+}
+
+.tap-bar {
+  position: fixed;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100vw;
+  height: 59px;
+  background: #fff;
+  color: #5a5a78;
+  box-shadow: 0 -1px 0 #e0e0e0;
+  font-size: 14px;
+  line-height: 21px;
+
+  > * {
+    display: grid;
+    cursor: pointer;
+    place-items: center;
   }
 }
 </style>
