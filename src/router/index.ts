@@ -6,6 +6,11 @@ const routes: RouteRecordRaw[] = [
     component: () =>
       import('@/modules/invoices/views/invoiceList/InvoiceList.vue'),
   },
+  {
+    path: '/create-invoice',
+    component: () =>
+      import('@/modules/invoices/views/createInvoice/CreateInvoice.vue'),
+  },
 ]
 
 const router = createRouter({

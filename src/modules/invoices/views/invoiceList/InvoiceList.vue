@@ -28,8 +28,8 @@
   </div>
 
   <div class="tap-bar">
-    <div>掃描輸入</div>
-    <div>手輸發票</div>
+    <router-link to="/">掃描輸入</router-link>
+    <router-link to="/create-invoice">手輸發票</router-link>
   </div>
 
   <InvoiceDetail />
@@ -38,6 +38,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
+import { RouterLink } from 'vue-router'
 import InvoiceDetail from './InvoiceDetail.vue'
 import InvoiceListItem from './InvoiceListItem.vue'
 import { initInvoices } from '../../application/initInvoices'
@@ -109,13 +110,14 @@ header {
   width: 100vw;
   height: 59px;
   background: #fff;
-  color: #5a5a78;
   box-shadow: 0 -1px 0 #e0e0e0;
   font-size: 14px;
   line-height: 21px;
 
   > * {
     display: grid;
+    color: #5a5a78;
+    text-decoration: none;
     cursor: pointer;
     place-items: center;
   }
