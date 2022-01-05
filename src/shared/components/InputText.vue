@@ -1,22 +1,19 @@
 <template>
   <input
-    :value="modelValue"
+    :value="props.modelValue"
     @input="updateValue(($event.target as HTMLInputElement).value)"
   />
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-
+/* eslint-disable vue/no-unused-properties */
 interface Props {
-  modelValue: string
+  modelValue: string | null
 }
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
 })
-
-const { modelValue } = reactive(props)
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
