@@ -23,10 +23,39 @@
   },
   "plugins": ["vue", "@typescript-eslint"],
   "rules": {
+    "import/no-cycle": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
         "devDependencies": ["vite.config.ts"]
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "caseInsensitive": true,
+          "order": "asc"
+        },
+        "groups": [
+          "external",
+          "builtin",
+          "index",
+          "sibling",
+          "parent",
+          "internal",
+          "object",
+          "type"
+        ],
+        "newlines-between": "never",
+        "pathGroups": [
+          {
+            "group": "external",
+            "pattern": "vue",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["vue"]
       }
     ],
     "import/prefer-default-export": "off",
@@ -75,7 +104,6 @@
     "vue/no-potential-component-option-typo": "error",
     "vue/no-template-target-blank": "error",
     "vue/no-unregistered-components": "error",
-    "import/no-cycle": "off",
     "vue/no-unused-properties": [
       "warn",
       {
@@ -92,34 +120,6 @@
       "never",
       {
         "ignoreIncludesComment": false
-      }
-    ],
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "external",
-          "builtin",
-          "index",
-          "sibling",
-          "parent",
-          "internal",
-          "object",
-          "type"
-        ],
-        "newlines-between": "never",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        },
-        "pathGroups": [
-          {
-            "pattern": "vue",
-            "group": "external",
-            "position": "before"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": ["vue"]
       }
     ]
   },

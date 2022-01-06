@@ -76,14 +76,33 @@
           }}
         </span>
       </div>
+
+      <div
+        v-if="openedInvoice.label === '驗證中'"
+        class="delete-button"
+        @click="clickDeleteButton"
+      >
+        <IconBase
+          width="11"
+          height="12"
+          icon-color="#E0E0E0"
+          icon-name="DeleteIcon"
+          @click="closeInvoiceDetail"
+        >
+          <DeleteIcon />
+        </IconBase>
+        <span>刪除發票</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import deleteInvoice from '../../application/deleteInvoice'
 import useInvoicesStore from '../../store/invoiceStore'
 import CloseIcon from '@/shared/components/icons/CloseIcon.vue'
+import DeleteIcon from '@/shared/components/icons/DeleteIcon.vue'
 import IconBase from '@/shared/components/icons/IconBase.vue'
 import Tag from '@/shared/components/Tag.vue'
 
@@ -92,6 +111,14 @@ const { openedInvoice } = storeToRefs(invoicesStore)
 
 function closeInvoiceDetail(): void {
   invoicesStore.closeInvoiceDetail()
+}
+
+function clickDeleteButton(): void {
+  const id = invoicesStore.openedInvoice?.id
+
+  if (id === undefined) return
+
+  void deleteInvoice(id)
 }
 </script>
 
@@ -211,6 +238,26 @@ function closeInvoiceDetail(): void {
       box-shadow: 0 -1px 0 #e0e0e0;
       font-size: 12px;
       line-height: 18px;
+    }
+
+    .delete-button {
+      position: absolute;
+      bottom: -35px;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 75px;
+      height: 30px;
+      color: #e0e0e0;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+      cursor: pointer;
+
+      span {
+        margin-left: 2px;
+      }
     }
   }
 }
