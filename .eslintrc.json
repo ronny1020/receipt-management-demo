@@ -75,6 +75,7 @@
     "vue/no-potential-component-option-typo": "error",
     "vue/no-template-target-blank": "error",
     "vue/no-unregistered-components": "error",
+    "import/no-cycle": "off",
     "vue/no-unused-properties": [
       "warn",
       {

@@ -3,28 +3,38 @@
     <div class="invoice-info">
       <span class="invoice-date">{{ date }}</span>
       <Tag
-        :type="invoice.label === '驗證中' ? 'danger' : 'primary'"
-        :text="invoice.label"
+        :type="props.invoice.label === '驗證中' ? 'danger' : 'primary'"
+        :text="props.invoice.label"
       />
     </div>
     <div class="invoice-content">
       <span class="invoice-description">
-        {{ invoice.details?.[0].description || invoice.invNum }}
+        {{
+          'details' in props.invoice
+            ? props.invoice.details?.[0].description
+            : props.invoice.invNum
+        }}
       </span>
       <span class="invoice-seller">
-        {{ invoice.sellerName || '無店家資料' }}
+        {{
+          'sellerName' in props.invoice
+            ? props.invoice.sellerName
+            : '無店家資料'
+        }}
       </span>
     </div>
     <div class="invoice-total">
       {{
-        invoice.amount === undefined ? '--' : invoice.amount.toLocaleString()
+        'amount' in props.invoice
+          ? props.invoice.amount.toLocaleString()
+          : '--'
       }}元
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
+import { computed } from 'vue'
 import moment from 'moment'
 import { Invoice } from '../../models/invoice'
 import Tag from '@/shared/components/Tag.vue'
@@ -35,14 +45,12 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { invoice } = reactive(props)
-
 const date = computed(() => {
-  if (!invoice) {
+  if (!props.invoice) {
     return ''
   }
 
-  return moment(invoice.time).format('MM/DD')
+  return moment(props.invoice.time).format('MM/DD')
 })
 </script>
 

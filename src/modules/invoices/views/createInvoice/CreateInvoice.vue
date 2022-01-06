@@ -36,6 +36,7 @@ import FormGroup, { patternValidator } from 'vue-reactive-form'
 import { RouterLink } from 'vue-router'
 import submitCreateInvoiceForm from '../../application/handleSubmitCreateInvoiceForm'
 import { CreateInvoiceForm } from '../../models/createInvoice'
+import router from '@/router'
 import BackIcon from '@/shared/components/icons/BackIcon.vue'
 import IconBase from '@/shared/components/icons/IconBase.vue'
 import InputText from '@/shared/components/InputText.vue'
@@ -45,20 +46,27 @@ const formGroup = new FormGroup<CreateInvoiceForm>({
   invoiceAlphabet: { validators: [patternValidator(/^[A-Z]{2}$/)] },
   invoiceNumber: { validators: [patternValidator(/^\d{8}$/)] },
   year: { validators: [patternValidator(/^\d{4}$/)] },
-  month: { validators: [patternValidator(/^\d{2}$/)] },
-  day: { validators: [patternValidator(/^\d{2}$/)] },
+  month: { validators: [patternValidator(/^(0?[1-9]|1[0-2])$/)] },
+  day: { validators: [patternValidator(/^[1-9]|[1-2][0-9]|3[0-1]$/)] },
 })
 
 const { invoiceAlphabet, invoiceNumber, year, month, day } = formGroup.refs
 const { valid, values } = formGroup
 
-function handleSubmit(): void {
+async function handleSubmit(): Promise<void> {
   if (!valid.value) {
     // eslint-disable-next-line no-alert
     alert('請輸入正確的發票資訊')
     return
   }
-  submitCreateInvoiceForm(values.value)
+  try {
+    await submitCreateInvoiceForm(values.value)
+
+    void router.push('/')
+  } catch (e) {
+    // eslint-disable-next-line no-alert
+    alert(e)
+  }
 }
 </script>
 

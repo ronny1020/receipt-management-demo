@@ -19,17 +19,19 @@
       </span>
     </div>
 
-    <InvoiceListItem
-      v-for="(invoice, index) of invoices"
-      :key="invoice.id"
-      :invoice="invoice"
-      @click="openInvoiceDetail(index)"
-    />
-  </div>
+    <div class="invoice-list-items-wrapper">
+      <InvoiceListItem
+        v-for="(invoice, index) of invoices"
+        :key="invoice.id"
+        :invoice="invoice"
+        @click="openInvoiceDetail(index)"
+      />
+    </div>
 
-  <div class="tap-bar">
-    <router-link to="/">掃描輸入</router-link>
-    <router-link to="/create-invoice">手輸發票</router-link>
+    <div class="tap-bar">
+      <router-link to="/">掃描輸入</router-link>
+      <router-link to="/create-invoice">手輸發票</router-link>
+    </div>
   </div>
 
   <InvoiceDetail />
@@ -48,14 +50,17 @@ import MainLogo from '@/shared/components/icons/MainLogo.vue'
 
 const invoicesStore = useInvoicesStore()
 const { invoices } = storeToRefs(invoicesStore)
-onMounted(() => {
-  void initInvoices()
+onMounted(async () => {
+  await initInvoices()
 })
 
 const invoiceNumber = computed((): number => invoices.value.length)
 
 const sumOfTotalPrice = computed((): number =>
-  invoices.value.reduce((total, invoice) => total + (invoice.amount || 0), 0)
+  invoices.value.reduce(
+    (total, invoice) => total + ('amount' in invoice ? invoice.amount : 0),
+    0
+  )
 )
 
 function openInvoiceDetail(index: number): void {
@@ -65,12 +70,16 @@ function openInvoiceDetail(index: number): void {
 
 <style lang="scss" scoped>
 .background {
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   background: #f5f5f5;
 }
 
 header {
   display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -80,6 +89,7 @@ header {
 
 .description {
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -102,12 +112,17 @@ header {
   }
 }
 
+.invoice-list-items-wrapper {
+  display: block;
+  flex-shrink: 1;
+  overflow-y: auto;
+  height: 100%;
+}
+
 .tap-bar {
-  position: fixed;
-  bottom: 0;
   display: grid;
+  flex-shrink: 0;
   grid-template-columns: 1fr 1fr;
-  width: 100vw;
   height: 59px;
   background: #fff;
   box-shadow: 0 -1px 0 #e0e0e0;

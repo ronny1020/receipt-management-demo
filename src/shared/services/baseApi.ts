@@ -6,10 +6,15 @@ const headers = new Headers({
   Accept: 'application/json',
 })
 
-function getUrl(
-  path: string,
-  params?: Record<string, string | number | boolean>
-) {
+export interface RequestParams {
+  [key: string]: string | number | boolean
+}
+
+export interface RequestBody {
+  [key: string]: any
+}
+
+function getUrl(path: string, params?: RequestParams) {
   let url = `${domain}${path}`
   if (params) {
     url += '?'
@@ -20,10 +25,7 @@ function getUrl(
   return url
 }
 
-export async function apiGet<T = any>(
-  path: string,
-  params?: Record<string, string | number | boolean>
-) {
+export async function apiGet<T = any>(path: string, params?: RequestParams) {
   const url = getUrl(path, params)
   const res = await fetch(url, {
     method: 'GET',
@@ -34,8 +36,8 @@ export async function apiGet<T = any>(
 
 export async function apiPost<T = any>(
   path: string,
-  body?: Record<string, string | number | boolean>,
-  params?: Record<string, string | number | boolean>
+  body?: RequestBody,
+  params?: RequestParams
 ) {
   const url = getUrl(path, params)
   const res = await fetch(url, {
@@ -48,8 +50,8 @@ export async function apiPost<T = any>(
 
 export async function apiPut<T = any>(
   path: string,
-  body?: Record<string, string | number | boolean>,
-  params?: Record<string, string | number | boolean>
+  body?: RequestBody,
+  params?: RequestParams
 ) {
   const url = getUrl(path, params)
   const res = await fetch(url, {
@@ -60,10 +62,7 @@ export async function apiPut<T = any>(
   return res.json() as Promise<T>
 }
 
-export async function apiDelete<T = any>(
-  path: string,
-  params?: Record<string, string | number | boolean>
-) {
+export async function apiDelete<T = any>(path: string, params?: RequestParams) {
   const url = getUrl(path, params)
   const res = await fetch(url, {
     method: 'DELETE',

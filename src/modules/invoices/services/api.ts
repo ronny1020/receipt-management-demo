@@ -1,6 +1,10 @@
-import { InvoiceDto } from '../models/invoice'
-import { apiGet } from '@/shared/services/baseApi'
+import { InputtedInvoiceDto, InvoiceDto } from '../models/invoice'
+import { apiGet, apiPost } from '@/shared/services/baseApi'
 
-export async function getInvoicesDto(): Promise<InvoiceDto[]> {
+export function getInvoicesDto(): Promise<InvoiceDto[]> {
   return apiGet<InvoiceDto[]>('/invoices')
+}
+
+export function postInvoicesDto(body: InputtedInvoiceDto): Promise<void> {
+  return apiPost('/invoices', body)
 }
