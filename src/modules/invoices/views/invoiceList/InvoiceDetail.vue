@@ -20,7 +20,11 @@
         <div class="lightbox-invoice-number">{{ openedInvoice.invNum }}</div>
         <div class="lightbox-invoice-time">{{ openedInvoice.time }}</div>
         <div class="lightbox-invoice-seller">
-          {{ openedInvoice.sellerName }}
+          {{
+            'sellerName' in openedInvoice
+              ? openedInvoice.sellerName
+              : '無店家資料'
+          }}
         </div>
       </div>
 
@@ -36,29 +40,41 @@
           </thead>
           <tbody>
             <tr
-              v-for="(
-                { description, quantity, unitPrice, amount }, index
-              ) of openedInvoice.details"
-              :key="index"
+              v-if="
+                !('details' in openedInvoice) || !openedInvoice.details.length
+              "
             >
-              <td>{{ description }}</td>
-              <td>{{ quantity }}</td>
-              <td>{{ unitPrice }}</td>
-              <td>{{ amount }}</td>
-            </tr>
-            <tr v-if="!openedInvoice.details || !openedInvoice.details.length">
               <td colspan="4" class="empty-details">
                 <div>- 沒有明細資料 -</div>
                 <div>此張發票可能正在等待店家更新或驗證。</div>
               </td>
             </tr>
+            <template v-else>
+              <tr
+                v-for="(
+                  { description, quantity, unitPrice, amount }, index
+                ) of openedInvoice.details"
+                :key="index"
+              >
+                <td>{{ description }}</td>
+                <td>{{ quantity }}</td>
+                <td>{{ unitPrice }}</td>
+                <td>{{ amount }}</td>
+              </tr>
+            </template>
           </tbody>
         </table>
       </div>
 
       <div class="lightbox-footer">
         <span>總金額</span>
-        <span>{{ openedInvoice.amount?.toLocaleString() || '--' }}</span>
+        <span>
+          {{
+            'amount' in openedInvoice
+              ? openedInvoice.amount?.toLocaleString()
+              : '--'
+          }}
+        </span>
       </div>
     </div>
   </div>
